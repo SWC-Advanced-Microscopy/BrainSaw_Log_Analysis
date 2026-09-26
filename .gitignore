@@ -1,0 +1,4 @@
+# Unpacked logs (about 1.3 GB); the repository holds raw/MERGED_LOGS.tar.bz2
+raw/MERGED_LOGS
+__pycache__/
+.DS_Store

@@ -1,0 +1,19 @@
+Copyright (c) 2026 Sainsbury Wellcome Centre, University College London
+
+The data, figures and documentation in this repository are licensed under the
+Creative Commons Attribution 4.0 International License (CC BY 4.0).
+
+This covers everything that is not source code, including:
+  raw/MERGED_LOGS.tar.bz2     the instrument logs
+  raw/derived_data/           the derived tables
+  *.png, *.eps                the figures
+  *.md                        the documentation
+
+You may share and adapt this material for any purpose, provided you give
+appropriate credit, by citing the accompanying BakingTray paper, and indicate
+if changes were made.
+
+Full licence text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+The source code (*.py) is licensed separately under the MIT License;
+see LICENSE.

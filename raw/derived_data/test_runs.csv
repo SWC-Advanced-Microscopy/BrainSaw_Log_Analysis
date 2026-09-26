@@ -1,0 +1,8 @@
+key,log,pc_dir,sections
+brainsaw|2017/09/21 16:22:41,MERGED_LOGS/mrsic_flogel/public/projects/AnBl_20171004_BrainsawThreeColors/800nm_higherPower/acqLog_RR41_S4S4.txt,SlideTests_21092017,1
+brainsaw|2017/10/09 18:53:22,MERGED_LOGS/mrsic_flogel/public/projects/AnBl_20171004_BrainsawThreeColors/RR25_s04s06_800nm_20per/acqLog_RR25_s04s06.txt,RR25_s04s06_20per,1
+brainsaw|2017/10/09 19:08:59,MERGED_LOGS/mrsic_flogel/public/projects/AnBl_20171004_BrainsawThreeColors/RR25_s04s06_1030_100percent/acqLog_RR25_s04s06.txt,RR25_s04s06_1030_100percent,1
+brainsaw|2017/10/09 19:22:56,MERGED_LOGS/mrsic_flogel/public/projects/AnBl_20171004_BrainsawThreeColors/RR25_s04s06_870nm_50perc/acqLog_RR25_s04s06.txt,RR25_s04s06_870nm_50perc,1
+neurovision|2022/03/04 11:14:29,MERGED_LOGS/mrsic_flogel/public/projects/NiVi_2021_vLGN/Optogenetics/Histology/vLGN_PV/ChR/NV_PVCR1_2_04032022_restart/acqLog_NV_PVCR1_2_04032022_restart.txt,NV_PVCR1_2_04032022,1
+neurovision|2023/08/02 18:34:19,MERGED_LOGS/mrsic_flogel/public/projects/SjWe_20230307_IBLAnatomy/histology/00-SWC/PROJECTS/SWC04/fix-ms-cns/fix-ms-cns~001/000_data/ss2p/2p-depth/1131793_d/acqLog_1131793_d.txt,1131793)1952_2034_2078_d,1
+neurovision|2024/04/09 18:36:27,MERGED_LOGS/isogai/SB_TRAP_826_240409/acqLog_SB_TRAP_826_240409.txt,SB_TRAP_826_240409,1
