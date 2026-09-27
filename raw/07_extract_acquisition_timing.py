@@ -204,10 +204,15 @@ def main():
                                   "sections": None, "recipes": []})
     for p, start, sections, r in parsed:
         g = groups[f"{r['system']}|{start}"]
-        # Brains are counted as sample directories, by basename, so one
-        # directory filed under two labs is one brain. Runs with several
-        # brains in one directory are undercounted.
-        g["dirs"][os.path.basename(os.path.dirname(p))] = True
+        # Brains are counted as sample directories, keyed by the directory's
+        # basename and the acqLog's file name: one directory filed under two
+        # labs is one brain, but sample directories that share a generic
+        # name (the BIDS-style ".../sub-056_id-CAP56/.../2pe/") stay
+        # separate. A run with several brains in one uncropped directory is
+        # still counted as one brain; stage 08 drops such runs from the
+        # timing figure by their tile count.
+        g["dirs"][(os.path.basename(os.path.dirname(p)),
+                   os.path.basename(p).lower())] = True
         g["labs"].add(lab_of(p))
         # The longest copy, in case one is incomplete.
         if g["sections"] is None or len(sections) > len(g["sections"]):
@@ -270,7 +275,7 @@ def main():
             recs = g["recipes"]
             if not recs:
                 continue
-            dirs = sorted(g["dirs"])
+            dirs = sorted(d for d, _log in g["dirs"])
             ids = sorted({r["sample_id"] for r in recs if r["sample_id"]})
             r0 = recs[0]
 
@@ -312,7 +317,11 @@ def main():
                 "sample_dirs": ";".join(dirs),
                 "recipe_sample_ids": ";".join(ids),
                 # Sample names start with the user's initials ("VP_CAP56").
-                "initials": (dirs[0].split("_")[0] if dirs else ""),
+                # Taken from both the directory names and the recipes'
+                # sample IDs, since a directory may have a generic name
+                # ("2pe") that hides them.
+                "initials": ";".join(sorted({n.split("_")[0]
+                                             for n in dirs + ids if n})),
                 "voxel_x_um": r0["voxel_x_um"],
                 "voxel_y_um": r0["voxel_y_um"],
                 "voxel_z_um": r0["voxel_z_um"],

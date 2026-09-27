@@ -28,7 +28,7 @@ The imaging data themselves were not used.
 | Unplanned restarts | 124: 39 laser faults, 85 unexplained |
 | Unplanned restarts, 2020–2026 | about 1 per 34 acquisitions, or 1 per 470 imaging hours (mean of yearly values) |
 
-No laser fault was logged after December 2025. Unexplained stops have no error text in the log; 45 of the 85 were resumed within an hour and 40 sat for an hour or more. The supplementary figure reports acquisition time for 632 runs (791 in panels D–F) since January 2020 on the BrainSaw and NeuroVision microscopes, scaled to 12.5 mm of tissue.
+No laser fault was logged after December 2025. Unexplained stops have no error text in the log; 45 of the 85 were resumed within an hour and 40 sat for an hour or more. The supplementary figure reports acquisition time for 582 runs (738 in panels D–F) since January 2020 on the BrainSaw and NeuroVision microscopes, scaled to 12.5 mm of tissue; rat brains and 40 single-sample runs holding more than one mouse brain's worth of tissue are left out (see [Timing cohort](#definitions)).
 
 
 
@@ -55,13 +55,13 @@ Graphs show data up to mid-July 2026.
 
 - **E.** Restarts by year. Restarts due to the laser are highlighted; these were more likely due to a bug in the serial communications protocol (fixed in 2026) than to a true laser problem.
 
-- **F.** The time between an acquisition stopping and it being restarted. User-aborted restarts are not included, as typically those were restarted immediately.
+- **F.** The time between an acquisition stopping and its restart. User-aborted restarts are not included, as typically those were restarted immediately.
 
-- **G.** A time-to-failure measure: the mean number of acquisitions per unplanned restart.
+- **G.** A time-to-failure measure: the number of acquisitions per unplanned restart in each year.
 
 - **H.** The data in G in units of acquisition hours per unplanned restart.
 
-- **I.** Restart rate per year. User-originated restarts are those where the user initiated an acquisition restart. Unplanned restarts were forced by an error of some sort, such as a hard crash of MATLAB or a power cut. The years 2016–2019 are possibly inflated by the smaller number of acquisitions conducted over that period (A), although BakingTray was also under heavier development at that time.
+- **I.** Restart rate per year. User-originated restarts followed a stop that the user requested or that BakingTray made by design (a manual abort, reaching the requested number of sections, or finding no tissue). Unplanned restarts followed a stop forced by an error, such as a laser fault, a hard crash of MATLAB or a power cut. The years 2016–2019 had fewer acquisitions, so their rates are less reliable, and BakingTray was under heavier development at that time.
 
   
 
@@ -77,7 +77,7 @@ We did not include acquisition time data from our third microscope, which is equ
 - **C.** Data from A and B normalised by the number of brains in the acquisition. Points are individual acquisitions, lines join the medians. Acquisition time per brain falls as more brains are added, mostly due to lower cutting time per brain.
 - **D–F.** Acquisition time normalised to 12.5 mm of imaged depth plotted against the number of averaged frames, separately for acquisitions of one brain (D), two brains (E) and four brains (F). Points are individual acquisitions, lines join medians of averaging levels represented by at least five acquisitions.
 
-Throughout, points are jittered horizontally to reduce over-plotting, and the dashed line marks 24 h. Panels A–C include only data with ≤ 4 frames of averaging for the lower-resolution data and ≤ 2 frames for the higher-resolution data. Sample sizes are n = 632 acquisitions (A–C) and n = 791 acquisitions (D–F). The variability in acquisition times is due to factors such as cutting speed, the amount of agarose being cut, frame averaging, and variability in autoROI behaviour.
+Throughout, points are jittered horizontally to reduce over-plotting, and the dashed line marks 24 h. Panels A–C include only data with ≤ 4 frames of averaging for the lower-resolution data and ≤ 2 frames for the higher-resolution data. Rat brains and single-sample runs holding more than one mouse brain's worth of tissue are excluded (see [Timing cohort](#definitions)). Sample sizes are n = 582 acquisitions (A–C) and n = 738 acquisitions (D–F). The variability in acquisition times is due to factors such as cutting speed, the amount of agarose being cut, frame averaging, and variability in autoROI behaviour.
 
 
 
@@ -100,6 +100,8 @@ or unexplained. The first two are user-originated, the last two unplanned.
 Two consecutive runs on one microscope are one acquisition if the second began at the depth where the first would have cut its next section. They are also one acquisition if the second began within 24 h of the first ending, wrote to the same acquisition-PC directory or that name plus a suffix, and either continued the section numbering or followed a first run of fewer than 80 sections. There are 22 such pairs. Only the samples of the run with more samples are counted, so a first attempt that was never cropped does not replace the resumed run's cropped samples, and the stop between the runs is a restart.
 
 **Imaging time.** The sum of the per-section durations printed in the log. This will exclude downtime between a stop and a restart.
+
+**Timing cohort.** The acquisitions in the supplementary figure (`raw/08_build_timing_figure_data.py`): from January 2020, on BrainSaw or NeuroVision, in the 4 × 4 × 20 or 2 × 2 × 5 µm voxel categories, at least 9.5 mm cut, and not rat brains. Rat brains are recognised by sample names starting with the initials of users known to image rats (VP, CM or TBM in any lab; AR, ATL, DO, EC, EM, HAA, LP or LSA in the Akrami lab), read from both the sample directory name and the recipe's sample ID. Brains are counted as the sample directories holding a copy of the acquisition log, so several brains left in one uncropped directory count as one. A run counted as one brain is therefore also excluded if its mean tile positions per section exceed 1.6 times the median of that value across single-brain runs in its voxel category (about 58 in both; two-brain runs have medians of 110 at 4 × 4 × 20 µm and 118 at 2 × 2 × 5 µm). 40 runs are excluded this way; they are listed in `timing_oversized_runs.csv`, and often the recipe's sample ID names several animals (e.g. `SL_1095774_1111674_1111678_1112061`). They remain single samples in the sample counts, since how many brains they held is not known.
 
 
 
@@ -164,6 +166,8 @@ A rebuild reproduces `derived_data/` byte for byte and draws no figures; redraw 
 * Resumes into a new directory are found by cutting depth or directory name. A run resumed under an unrelated name, and not at the depth where the first run stopped, is counted as a new acquisition with no restart.
 
 * Only surviving files are counted. 3,245 of 3,251 acquisitions (99.8%) have an acquisition log; the rest contribute no hours.
+
+* A multi-sample acquisition that was never cropped into separate directories counts as one sample, so the sample count is conservative. Such runs are kept out of the timing figure by their tile count (see [Timing cohort](#definitions)), a rule that also drops some genuine single brains imaged with an unusually large area.
 
   
 

@@ -80,5 +80,5 @@ Panel C of the main figure groups acquisitions by lateral pixel size. The band e
 
 ![Depth normalisation](raw/readme_images/08_depth_normalisation.png)
 
-The supplementary figure scales each acquisition's imaging time to 12.5 mm of tissue, and excludes acquisitions that cut less than 9.5 mm. For the 272 of 632 acquisitions that reached 12.5 mm, we compared the scaled time with the time actually taken to get there (A).
+The supplementary figure scales each acquisition's imaging time to 12.5 mm of tissue, and excludes acquisitions that cut less than 9.5 mm. For the 254 of 582 acquisitions that reached 12.5 mm, we compared the scaled time with the time actually taken to get there (A).
 Scaling underestimates it by a median of 2.7% (IQR 1.0–4.2%; B), because the sections cut after 12.5 mm take less time than those before it.

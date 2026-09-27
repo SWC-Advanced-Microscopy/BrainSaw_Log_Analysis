@@ -104,10 +104,10 @@ Paths are stored relative, as `MERGED_LOGS/<lab>/...`; `paths.abs_log` resolves 
 | `fig_per_year.csv` | year | 11 | acquisitions, hours, tiles, restarts by category, rates |
 | `acq_timing_index.csv` | acquisition | 3,243 | settings, brains, depth and hours; unfiltered |
 | `acq_timing_sections.csv.gz` | section | 874,156 | cumulative time and tiles against depth |
-| `fig_timing_cohort.csv` | acquisition | 632 | timing-figure cohort, averaging capped |
-| `fig_timing_averaging.csv` | acquisition | 791 | the same, averaging uncapped |
+| `fig_timing_cohort.csv` | acquisition | 582 | timing-figure cohort, averaging capped |
+| `fig_timing_averaging.csv` | acquisition | 738 | the same, averaging uncapped |
 
-Intermediate and audit tables: `unique_recipes.txt`, `unique_acqlogs.txt`, `duplicate_groups.csv`, `resume_recipes.csv`, `unsplit_recipes.csv`, `new_directory_resumes.csv`, `test_runs.csv` (01); `sample_acquisition_groups.csv` (02); `restart_events_full.csv`, `setup_restarts.csv` (03); `acquisition_metrics_per_logfile.csv` (05).
+Intermediate and audit tables: `unique_recipes.txt`, `unique_acqlogs.txt`, `duplicate_groups.csv`, `resume_recipes.csv`, `unsplit_recipes.csv`, `new_directory_resumes.csv`, `test_runs.csv` (01); `sample_acquisition_groups.csv` (02); `restart_events_full.csv`, `setup_restarts.csv` (03); `acquisition_metrics_per_logfile.csv` (05); `timing_oversized_runs.csv`, the single-brain runs left out of the timing figure for their tile count (08).
 
 Acquisition keys name the microscope and start time, in two formats that do not join directly:
 `brainsaw|220726_114752` (recipe start time; sample and resolution tables) and
